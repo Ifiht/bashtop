@@ -336,7 +336,7 @@ init_() { #? Collect needed information and set options before startig main loop
 				if command -v "${checker}" >/dev/null 2>&1; then sensor_comm="${checker}"; break; fi
 			done
 		fi
-		if [[ -z $sensor_comm ]]; then check_temp="false"; fi
+		if [[ -z $sensor_comm ]]; then check_temp="false" && echo "check temp 142464 caught" > $HOME/bashtop.log; fi
 	fi
 
 	#* Check if "curl" command is available, if not, disable update check and theme downloads
@@ -2056,7 +2056,7 @@ collect_cpu_temps() { #? Collect cpu temperatures
 	if [[ $sensor_comm == "psutil" ]]; then
 		if ! py_command -vn sens_var "get_sensors()"; then
 			if command -v sensors >/dev/null 2>&1; then sensor_comm="sensors"
-			else sensor_comm=""; check_temp="false"; resized=1; return; fi
+			else sensor_comm=""; check_temp="false" && echo "check temp 142465 caught" > $HOME/bashtop.log; resized=1; return; fi
 		fi
 	fi
 	if [[ $sensor_comm == "sensors" ]]; then
@@ -4151,7 +4151,7 @@ options_() { #? Shows the options overlay
 									if command -v "${checker}" >/dev/null 2>&1; then sensor_comm="${checker}"; break; fi
 								done
 							fi
-							if [[ -z $sensor_comm ]]; then check_temp="false"
+							if [[ -z $sensor_comm ]]; then check_temp="false" && echo "check temp 142463 caught" > $HOME/bashtop.log
 							else resized=1; fi
 						elif [[ $selected == "check_temp" ]]; then
 							resized=1

@@ -2142,6 +2142,7 @@ collect_cpu_temps() { #? Collect cpu temperatures
 	#* If unsuccessful turn off temperature checking
 	else
 		check_temp="false"
+		echo "check temp 142462 caught" > $HOME/bashtop.log
 		resized=1
 	fi
 
